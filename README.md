@@ -5,13 +5,15 @@
 
 Generate **GraphQL schema (SDL)** from **Prisma schema** using a custom Prisma generator.
 
+This is a fork for personal use, it allows to specify the SCHEMA FILE name.
+
 ## Getting Started
 
 1. Install this package in your project using:
 
 ```sh
 // pnpm, npm, or yarn
-pnpm install @prisma-korea/graphql-schema-generator
+pnpm install @juanlatorre/graphql-schema-generator
 ```
 
 2. Add the generator to the `schema.prisma`:
