@@ -1,5 +1,5 @@
 {
-  "name": "@prisma-korea/graphql-schema-generator",
+  "name": "@juanlatorre/graphql-schema-generator",
   "version": "0.3.0",
   "main": "dist-cjs/index.js",
   "types": "dist-cjs/index.d.ts",

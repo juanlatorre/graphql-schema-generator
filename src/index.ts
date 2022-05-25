@@ -2,9 +2,9 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import {generatorHandler} from '@prisma/generator-helper';
 
 import generateGraphqlSchema from './generateGraphqlSchema';
+import {generatorHandler} from '@prisma/generator-helper';
 
 export * from './converters/types';
 
@@ -36,7 +36,7 @@ generatorHandler({
         });
 
         await fs.promises.writeFile(
-          path.join(output, 'schema.graphql'),
+          path.join(output, config?.customSchema || 'schema.graphql'),
           result,
         );
       } catch (e) {

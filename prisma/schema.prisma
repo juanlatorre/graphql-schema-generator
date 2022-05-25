@@ -4,10 +4,11 @@ datasource db {
 }
 
 generator graphql {
-  provider = "node ./dist-cjs/index.js"
-  output = "./generated"
-  createCRUD = "true"
-  customRules = "./rules.ts"
+  provider     = "node ./dist-cjs/index.js"
+  output       = "./generated"
+  customSchema = "esquema.graphql"
+  createCRUD   = "true"
+  customRules  = "./rules.ts"
 }
 
 // Try yours! Schema below is from here:
@@ -26,8 +27,8 @@ enum AuthType {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String?   @unique
+  id            String         @id @default(cuid())
+  email         String?        @unique
   password      String?
   name          String?
   nickname      String?
@@ -37,11 +38,11 @@ model User {
   gender        Gender?
   phone         String?
   statusMessage String?
-  verified      Boolean?  @default(false)
+  verified      Boolean?       @default(false)
   lastSignedIn  DateTime?
-  isOnline      Boolean?  @default(false)
-  createdAt     DateTime? @default(now())
-  updatedAt     DateTime? @default(now()) @updatedAt
+  isOnline      Boolean?       @default(false)
+  createdAt     DateTime?      @default(now())
+  updatedAt     DateTime?      @default(now()) @updatedAt
   deletedAt     DateTime?
   profile       Profile?
   notifications Notification[]
@@ -71,42 +72,44 @@ model Profile {
   id       Int       @id @default(autoincrement())
   socialId String?
   authType AuthType?
-  userId String @unique
-  User   User   @relation(fields: [userId], references: [id])
+  userId   String    @unique
+  User     User      @relation(fields: [userId], references: [id])
 }
 
 model Friend {
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
   deletedAt DateTime?
-  userId   String
-  user     User   @relation("FriendFrom", fields: [userId], references: [id])
-  friendId String
-  friend   User   @relation(fields: [friendId], references: [id])
+  userId    String
+  user      User      @relation("FriendFrom", fields: [userId], references: [id])
+  friendId  String
+  friend    User      @relation(fields: [friendId], references: [id])
+
   @@id([userId, friendId])
 }
 
 model BlockedUser {
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-  deletedAt DateTime?
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  deletedAt     DateTime?
   userId        String
-  user          User   @relation("UserBlock", fields: [userId], references: [id])
+  user          User      @relation("UserBlock", fields: [userId], references: [id])
   blockedUserId String
-  blockedUser   User   @relation(fields: [blockedUserId], references: [id])
+  blockedUser   User      @relation(fields: [blockedUserId], references: [id])
+
   @@id([userId, blockedUserId])
 }
 
 model Report {
-  id        String    @id @default(cuid())
-  report    String
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-  deletedAt DateTime?
+  id             String    @id @default(cuid())
+  report         String
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  deletedAt      DateTime?
   userId         String
-  user           User   @relation("UserReport", fields: [userId], references: [id])
+  user           User      @relation("UserReport", fields: [userId], references: [id])
   reportedUserId String
-  reportedUser   User   @relation(fields: [reportedUserId], references: [id])
+  reportedUser   User      @relation(fields: [reportedUserId], references: [id])
 }
 
 enum MembershipType {
@@ -127,10 +130,11 @@ model Membership {
   isVisible      Boolean        @default(true)
   createdAt      DateTime?      @default(now())
   updatedAt      DateTime?      @default(now()) @updatedAt
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
-  channelId String
-  channel   Channel @relation(fields: [channelId], references: [id])
+  userId         String
+  user           User           @relation(fields: [userId], references: [id])
+  channelId      String
+  channel        Channel        @relation(fields: [channelId], references: [id])
+
   @@id([userId, channelId])
   @@index([updatedAt])
 }
@@ -167,13 +171,13 @@ model Message {
   fileUrls    String[]
   reactions   Reaction[]
   replies     Reply[]
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-  deletedAt DateTime?
-  channelId String
-  channel   Channel @relation("Message", fields: [channelId], references: [id])
-  senderId  String
-  sender    User    @relation(fields: [senderId], references: [id])
+  createdAt   DateTime?   @default(now())
+  updatedAt   DateTime?   @default(now()) @updatedAt
+  deletedAt   DateTime?
+  channelId   String
+  channel     Channel     @relation("Message", fields: [channelId], references: [id])
+  senderId    String
+  sender      User        @relation(fields: [senderId], references: [id])
 }
 
 model Reply {
@@ -186,10 +190,10 @@ model Reply {
   createdAt   DateTime?   @default(now())
   updatedAt   DateTime?   @default(now()) @updatedAt
   deletedAt   DateTime?
-  senderId  String
-  sender    User    @relation(fields: [senderId], references: [id])
-  messageId String
-  message   Message @relation(fields: [messageId], references: [id])
+  senderId    String
+  sender      User        @relation(fields: [senderId], references: [id])
+  messageId   String
+  message     Message     @relation(fields: [messageId], references: [id])
 }
 
 model Reaction {
