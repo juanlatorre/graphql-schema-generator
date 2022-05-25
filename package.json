@@ -1,6 +1,6 @@
 {
   "name": "@juanlatorre/graphql-schema-generator",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "dist-cjs/index.js",
   "types": "dist-cjs/index.d.ts",
   "engines": {
@@ -97,6 +97,6 @@
     }
   },
   "bin": {
-    "graphql-schema-generator": "./dist-cjs/index.js"
+    "gql-schema-generator": "./dist-cjs/index.js"
   }
 }

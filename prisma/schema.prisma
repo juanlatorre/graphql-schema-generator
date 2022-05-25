@@ -6,7 +6,7 @@ datasource db {
 generator graphql {
   provider     = "node ./dist-cjs/index.js"
   output       = "./generated"
-  customSchema = "esquema.graphql"
+  customSchema = "_schema.graphql"
   createCRUD   = "true"
   customRules  = "./rules.ts"
 }

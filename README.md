@@ -20,7 +20,7 @@ pnpm install @juanlatorre/graphql-schema-generator
 
 ```prisma
 generator graphql {
-  provider = "graphql-schema-generator"
+  provider = "gql-schema-generator"
   createCRUD = "true"
   # output = "./generated" This is default path.
   # customSchema = "schema.graphql" This is default file name.
@@ -43,7 +43,7 @@ You can apply custom rules to manipulate behavior. [(Some use cases)](https://gi
 
 ```
 generator graphql {
-  provider = "graphql-schema-generator"
+  provider = "gql-schema-generator"
   output   = "../src/schemas"
   createCRUD = "true"
   customRules = "../prisma/rules.ts"
